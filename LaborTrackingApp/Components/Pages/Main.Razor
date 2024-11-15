@@ -1,0 +1,66 @@
+@page "/labor-management"
+
+<h3>Labor Management</h3>
+
+<div class="form-group">
+    <label>Total Labor Sold to Client</label>
+    <input type="number" @bind-value="job.TotalLaborSold" class="form-control" />
+</div>
+
+<h4>Employee Details</h4>
+<div class="form-inline">
+    <input placeholder="Name" @bind-value="newEmployee.Name" class="form-control" />
+    <input placeholder="Hourly Rate" type="number" @bind-value="newEmployee.HourlyRate" class="form-control" />
+    <input placeholder="Hours Worked" type="number" @bind-value="newEmployee.HoursWorked" class="form-control" />
+    <button class="btn btn-primary" @onclick="AddEmployee">Add Employee</button>
+</div>
+
+<h4>Employees</h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Hourly Rate</th>
+            <th>Hours Worked</th>
+            <th>Total Pay</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in job.Employees)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.HourlyRate</td>
+                <td>@employee.HoursWorked</td>
+                <td>@employee.TotalPay</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Labor Summary</h4>
+<p>Total Labor Sold: @job.TotalLaborSold:C</p>
+<p>Total Labor Used: @job.CalculateTotalLaborUsed():C</p>
+<p>Remaining Labor: @job.CalculateLaborRemaining():C</p>
+
+<div>
+    <canvas id="laborChart"></canvas>
+</div>
+
+@code {
+  private Job job = new Job();
+  private Employee newEmployee = new Employee();
+
+  private void AddEmployee()
+  {
+      if (!string.IsNullOrEmpty(newEmployee.Name) && newEmployee.HourlyRate > 0 && newEmployee.HoursWorked > 0)
+      {
+        job.Employees.Add(newEmployee);
+        newEmployee = new Employee();
+        StateHasChanged();
+        UpdateChart();
+      }
+  }
+
+  
+    

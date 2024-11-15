@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "LaborTrackingApp/1.0.0": {
+        "runtime": {
+          "LaborTrackingApp.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "LaborTrackingApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
